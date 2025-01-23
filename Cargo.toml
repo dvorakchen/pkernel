@@ -1,0 +1,19 @@
+[package]
+name = "kernel"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "kernel"
+path = "src/lib.rs"
+
+[profile.release]
+debug = true
+
+[dependencies]
+bitflags = "2.6.0"
+hashbrown = "0.15.2"
+linked_list_allocator = "0.10.5"
+riscv = "0.12.1"
+sbi-rt = { version = "0.0.2", features = ["legacy"] }
+thiserror = { version = "1.0", package = "thiserror-core", default-features = false }
