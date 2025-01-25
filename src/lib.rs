@@ -70,7 +70,7 @@ impl Kernel {
 
         macro_rules! map_kernel_memory {
             ($start: expr, $end: expr, $flags: expr) => {
-                println!("start: {:X}, end: {:X}", $start, $end);
+                println!("start: 0x{:X}, end: 0x{:X}", $start, $end);
                 let count = ($end - $start) / PAGE_SIZE;
                 for i in 0..count {
                     rpt.map(MapBlock::new(

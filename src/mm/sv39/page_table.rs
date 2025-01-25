@@ -5,7 +5,7 @@ use thiserror::Error;
 use crate::impl_from_to_usize;
 
 use crate::mm::{frame_allocator::SharedFrameAllocator, PAGE_TABLE_LENGTH};
-use crate::mm::{Frame, PhysicalAddress, VirtualPageNumber};
+use crate::mm::{Frame, PhysicalAddress, VirtualPageNumber, PAGE_OFFSET};
 
 use super::page_table_entry::{Flags, PTE};
 
@@ -108,7 +108,7 @@ impl RootPageTable {
     pub fn satp_token(&self) -> SatpToken {
         let mode = 8usize << 60;
         let asid = 0usize;
-        let ppn = self.address.value() & ((1 << 44) - 1);
+        let ppn = (self.address.value() & 0xFFF_FFFF_FFFF) >> PAGE_OFFSET;
 
         (mode | asid | ppn).into()
     }
